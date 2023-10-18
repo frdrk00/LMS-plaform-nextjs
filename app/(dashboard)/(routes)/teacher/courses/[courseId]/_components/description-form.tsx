@@ -19,11 +19,10 @@ import { Pencil } from 'lucide-react'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { Course } from '@prisma/client'
 
 interface DescriptionFormProps {
-  initialData: {
-    description: string
-  }
+  initialData: Course
   courseId: string
 }
 
@@ -45,7 +44,7 @@ export const DescriptionForm = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      description: initialData.description,
+      description: initialData?.description || '',
     },
   })
 
