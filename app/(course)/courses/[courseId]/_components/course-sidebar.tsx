@@ -22,10 +22,12 @@ export const CourseSidebar = async ({
     return redirect('/')
   }
 
-  const purchase = await db.purchase.findFirst({
+  const purchase = await db.purchase.findUnique({
     where: {
-      userId: userId,
-      courseId: course.id,
+      userId_courseId: {
+        userId,
+        courseId: course.id,
+      },
     },
   })
 
